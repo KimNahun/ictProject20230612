@@ -1,1 +1,5 @@
+
+cd /Users/gimnahun/Desktop/swift/ict/ictproject/functions
+
+
 firebase deploy --only functions

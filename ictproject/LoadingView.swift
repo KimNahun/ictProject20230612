@@ -27,7 +27,6 @@ struct LoadingView_Previews: PreviewProvider {
 struct DelayedView<Content: View>: View {
     let delay: TimeInterval
     let content: () -> Content
-    
     @State private var isShowingContent = false
     
     var body: some View {

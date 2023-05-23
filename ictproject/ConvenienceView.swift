@@ -23,18 +23,7 @@ struct PDFViewer: UIViewRepresentable {
     }
 }
 
-struct SecondView: View {
-    @State private var word = ""
-    let ictImages = ["ict1", "ict2", "ict3", "ict4", "ict5", "ict6", "ict7", "ict8", "ict9"]
-    var body: some View {
-        ScrollView {
-            ForEach(ictImages, id: \.self) { imageName in
-                Image(imageName)  .resizable()
-                    .aspectRatio(contentMode: .fit).frame(width: 400, height: 300)
-            }
-        }
-    }
-}
+
 
 struct PDFSelectionView: View {
     let pdfNames = ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"]
@@ -68,13 +57,13 @@ struct ConvenienceView: View {
                         .foregroundColor(.white)
                         .cornerRadius(10)
                 }
-                NavigationLink(destination: SecondView()) {
+                NavigationLink(destination: Bundle.main.url(forResource: "professor", withExtension: "pdf").map(PDFViewer.init)) {
                     Image("image2")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 100, height: 100)
                 }
-                NavigationLink(destination: FullScreenImage(image: Image("ictTeam"))) {
+                NavigationLink(destination: Bundle.main.url(forResource: "ictTeam", withExtension: "pdf").map(PDFViewer.init)) {
                     Image("image3")
                         .resizable()
                         .scaledToFit()
@@ -91,7 +80,7 @@ struct ConvenienceView: View {
         }
         ButtonItem()
     }
-  
+    
 }
 
 struct FullScreenImage: View {

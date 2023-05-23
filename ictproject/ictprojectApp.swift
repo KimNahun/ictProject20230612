@@ -4,21 +4,16 @@ import Firebase
 import UserNotifications
 //import FirebaseMessaging
 //공지 크롤링
-public var tempTitle = [String]()
-public var tempTitle1 = [String]()
-public var tempTitle2 = [String]()
-public var tempTitle3 = [String]()
-public var tempTitle4 = [String]()
-public var myArray1 = [[String]](repeating: [String](repeating: "", count: 5), count: 90)
-public var myArray2 = [[String]](repeating: [String](repeating: "", count: 5), count: 90)
-public var myArray3 = [[String]](repeating: [String](repeating: "", count: 5), count: 90)
-public var myArray4 = [[String]](repeating: [String](repeating: "", count: 5), count: 90)
-public var myArray = [[String]](repeating: [String](repeating: "", count: 5), count: 90)
+
+
+public var generalNotice = [[String]](repeating: [String](repeating: "", count: 6), count: 40)
+public var importantNotice = [[String]](repeating: [String](repeating: "", count: 6), count: 40)
+public var totalNotice = [[String]](repeating: [String](repeating: "", count: 6), count: 40)
+
 public var keywords = [String]() //사용자가 등록한 키워드
 public var noticeTitle = [String]()
 public var searchWord = "" //검색중인단어
 public var searchingWord = false //검색중인상태
-public var selectNoticeType = 0 // 일반공지, 학사공지, 장학공지 (근데 이거 필요없는듯?)
 public var fcm:String? = ""
 
 var getFirebase = FireBaseViewController()
@@ -93,9 +88,7 @@ extension AppDelegate: MessagingDelegate {
      //   print("FCM registration token: \(fcmToken ?? "")")
         //fcm 토큰을 추출하고, 그 후에 파이어베이스 데이터를 긁어온다
         fcm = fcmToken
-        getFirebase.readFireBaseData1()
-        getFirebase.readFireBaseData2()
-        getFirebase.readFireBaseData3()
+        getFirebase.readFireBaseData(fromPath: "일반공지")
         getFirebase.getMyIDData()
     }
     
