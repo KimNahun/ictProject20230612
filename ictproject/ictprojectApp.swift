@@ -9,12 +9,12 @@ import UserNotifications
 public var generalNotice = [[String]](repeating: [String](repeating: "", count: 6), count: 40)
 public var importantNotice = [[String]](repeating: [String](repeating: "", count: 6), count: 40)
 public var totalNotice = [[String]](repeating: [String](repeating: "", count: 6), count: 40)
-
 public var keywords = [String]() //사용자가 등록한 키워드
 public var noticeTitle = [String]()
 public var searchWord = "" //검색중인단어
 public var searchingWord = false //검색중인상태
 public var fcm:String? = ""
+public var noticeTypeSelect = "일반공지"
 
 var getFirebase = FireBaseViewController()
 

@@ -36,8 +36,12 @@ Object.keys(noticeTypes).forEach(noticeTypeKey => {
             const userRef = admin.database().ref('/User');
             return userRef.once('value').then(snapshot => {
                 const users = snapshot.val();
+                let notifiedUsers = new Set();
 
                 for (let userToken in users) {
+                    if (notifiedUsers.has(userToken)) {
+                        continue;
+                    }
                     for (let keyword of users[userToken]) {
                         if (notice['title'].includes(keyword)) {
                             var message = {
@@ -63,10 +67,12 @@ Object.keys(noticeTypes).forEach(noticeTypeKey => {
                             admin.messaging().send(message)
                                 .then((response) => {
                                     console.log('Successfully sent message:', response);
+                                    notifiedUsers.add(userToken);
                                 })
                                 .catch((error) => {
                                     console.log('Error sending message:', error);
                                 });
+                            break;
                         }
                     }
                 }
