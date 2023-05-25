@@ -16,7 +16,7 @@ class FireBaseViewController: UIViewController {
     func getMyIDData() {
         //refkeyword는 firebase의 유저정보 -> 식별자 -> (내 모바일 기기의 고유번호) -> 등록된 키워드
         
-        let refKeyword = Database.database().reference().child("User").child(fcm!)
+        let refKeyword = Database.database().reference().child("User").child(fcm!).child("keywords")
         refKeyword.observeSingleEvent(of: .value) { snapshot in
             //읽어들인 내 키워드들
             guard let readFirbaseKeywords = snapshot.value as? [String] else { return }
@@ -25,6 +25,12 @@ class FireBaseViewController: UIViewController {
                 keywords.append(i)
             }
         }
+        let refSendAll = Database.database().reference().child("User").child(fcm!).child("sendAll")
+            refSendAll.observeSingleEvent(of: .value) { snapshot in
+                // sendAll 값을 읽어들인다. 만약 값이 없으면, false로 간주
+                receiveAllMessage = snapshot.value as? Bool ?? false
+                // 이제 'a' 변수는 sendAll의 값이거나, 값이 없을 경우 false이다.
+            }
     }
     
     func readFireBaseData(fromPath path: String) {

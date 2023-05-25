@@ -22,14 +22,18 @@ Object.keys(noticeTypes).forEach(noticeTypeKey => {
 
             if (visitedSnapshot.hasChild(notice.number)) {
                 console.log('Notice has already been processed:', notice.number);
-                return null;
+                // Update with image_tag
+                visitedRef.child(notice.number).set(notice.image_tag === 1);
+		        return null;
             } else {
-                visitedRef.update({[notice.number]: true});
-                // Prune the database if it has more than 30 records.
-                if (visitedSnapshot.numChildren() > 50) {
-                    const childKeys = Object.keys(visitedSnapshot.val());
-                    childKeys.sort((a, b) => a - b); // Sort keys in ascending order.
-                    visitedRef.child(childKeys[0]).remove(); // Remove the smallest key.
+                visitedRef.update({[notice.number]: notice.image_tag === 1});
+                // Prune the database if it has more than 50 records.
+                if (visitedSnapshot.numChildren() > 100) {
+                    const childKeys = Object.entries(visitedSnapshot.val()).filter(([key, value]) => !value);
+                    childKeys.sort((a, b) => a[0] - b[0]); // Sort keys in ascending order.
+                    if (childKeys.length > 0) {
+                        visitedRef.child(childKeys[0][0]).remove(); // Remove the smallest key.
+                    }
                 }
             }
 
@@ -42,37 +46,71 @@ Object.keys(noticeTypes).forEach(noticeTypeKey => {
                     if (notifiedUsers.has(userToken)) {
                         continue;
                     }
-                    for (let keyword of users[userToken]) {
-                        if (notice['title'].includes(keyword)) {
-                            var message = {
+                    // If sendAll exists and is true, send notification without checking keywords
+                    if (users[userToken].sendAll) {
+                        var message = {
+                            notification: {
+                                title: `${noticeType}에 새로운 글이 추가되었습니다.`,
+                                body: notice['title']
+                            },
+                            android: {
                                 notification: {
-                                    title: `${noticeType}에 '${keyword}'의 글이 추가되었습니다.`,
-                                    body: notice['title']
-                                },
-                                android: {
-                                    notification: {
+                                    sound: 'default'
+                                }
+                            },
+                            apns: {
+                                payload: {
+                                    aps: {
                                         sound: 'default'
                                     }
-                                },
-                                apns: {
-                                    payload: {
-                                        aps: {
+                                }
+                            },
+                            token: userToken
+                        };
+
+                        admin.messaging().send(message)
+                            .then((response) => {
+                                console.log('Successfully sent message:', response);
+                                notifiedUsers.add(userToken);
+                            })
+                            .catch((error) => {
+                                console.log('Error sending message:', error);
+                            });
+                    } else {
+                        let userKeywords = users[userToken].keywords;
+                        for (let keywordIndex in userKeywords) {
+                            let keyword = userKeywords[keywordIndex];
+                            if (notice['title'].includes(keyword)) {
+                                var message = {
+                                    notification: {
+                                        title: `${noticeType}에 '${keyword}'의 글이 추가되었습니다.`,
+                                        body: notice['title']
+                                    },
+                                    android: {
+                                        notification: {
                                             sound: 'default'
                                         }
-                                    }
-                                },
-                                token: userToken
-                            };
+                                    },
+                                    apns: {
+                                        payload: {
+                                            aps: {
+                                                sound: 'default'
+                                            }
+                                        }
+                                    },
+                                    token: userToken
+                                };
 
-                            admin.messaging().send(message)
-                                .then((response) => {
-                                    console.log('Successfully sent message:', response);
-                                    notifiedUsers.add(userToken);
-                                })
-                                .catch((error) => {
-                                    console.log('Error sending message:', error);
-                                });
-                            break;
+                                admin.messaging().send(message)
+                                    .then((response) => {
+                                        console.log('Successfully sent message:', response);
+                                        notifiedUsers.add(userToken);
+                                    })
+                                    .catch((error) => {
+                                        console.log('Error sending message:', error);
+                                    });
+                                break;
+                            }
                         }
                     }
                 }

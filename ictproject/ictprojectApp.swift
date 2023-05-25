@@ -15,6 +15,7 @@ public var searchWord = "" //검색중인단어
 public var searchingWord = false //검색중인상태
 public var fcm:String? = ""
 public var noticeTypeSelect = "일반공지"
+public var receiveAllMessage = false
 
 var getFirebase = FireBaseViewController()
 

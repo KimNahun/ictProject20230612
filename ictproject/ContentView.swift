@@ -154,7 +154,7 @@ struct ButtonItem: View {
                     
                     SearchView()
                 })
-                Text("추가")
+                Text("키워드 등록")
             }
             Spacer()
             VStack{
@@ -188,7 +188,7 @@ struct ButtonItem: View {
                 .fullScreenCover(isPresented: $showingConvenienceView, content: {
                     ConvenienceView()
                 })
-                Text("학과정보")
+                Text("정보")
             }
         }
     }
