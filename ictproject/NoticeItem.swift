@@ -32,9 +32,11 @@ struct SafariView: UIViewControllerRepresentable {
 
 struct NoticeItem: View {
     var num: Int
+
     @State private var favorite = false
     var body: some View {
         VStack {
+          
             if searchingWord {
                 if totalNotice[num][0].contains(searchWord) {
                     if let validURL = URL(string: totalNotice[num][3]) {
@@ -51,6 +53,18 @@ struct NoticeItem: View {
                                     Spacer()
                                     Button(action: {
                                         favorite.toggle()
+                                        if favorite {
+                                            let favoriteData = totalNotice[num][0...5].reduce(into: [String: String]()) { dict, item in
+                                                dict[String(dict.count)] = item
+                                            }
+                                            let childUpdates = ["User/\(fcm!)/favorite/\(totalNotice[num][1])": favoriteData]
+                                            Database.database().reference().updateChildValues(childUpdates)
+                                        } else {
+                                            // favorite가 false일 때의 동작
+                                            let favoriteNumber = totalNotice[num][1]
+                                            // 데이터베이스에서 해당 번호의 favorite 제거
+                                            Database.database().reference().child("User").child(fcm!).child("favorite").child(favoriteNumber).removeValue()
+                                        }
                                     }) {
                                         Image(systemName: favorite ? "star.fill" : "star")
                                         
@@ -96,18 +110,16 @@ struct NoticeItem: View {
                                 Button(action: {
                                     favorite.toggle()
                                     if favorite {
-                                        // favorite가 true일 때의 동작
-                                 
                                         let favoriteData = totalNotice[num][0...5].reduce(into: [String: String]()) { dict, item in
                                             dict[String(dict.count)] = item
                                         }
-                                        Database.database().reference().child("User").child(fcm!).child("favorite").setValue(favoriteData)
-
-                                                                       } else {
-                                                                           // favorite가 false일 때의 동작
-                                                                           let favoriteNumber = totalNotice[num][1]
-                                                                           // 데이터베이스에서 해당 번호의 favorite 제거
-                                                                           Database.database().reference().child("User").child(fcm!).child("favorite").child(favoriteNumber).removeValue()
+                                        let childUpdates = ["User/\(fcm!)/favorite/\(totalNotice[num][1])": favoriteData]
+                                        Database.database().reference().updateChildValues(childUpdates)
+                                    } else {
+                                        // favorite가 false일 때의 동작
+                                        let favoriteNumber = totalNotice[num][1]
+                                        // 데이터베이스에서 해당 번호의 favorite 제거
+                                        Database.database().reference().child("User").child(fcm!).child("favorite").child(favoriteNumber).removeValue()
                                     }
                                 }) {
                                     Image(systemName: favorite ? "star.fill" : "star")
@@ -141,6 +153,8 @@ struct NoticeItem: View {
                 
                 
             }
+        }.onAppear {
+            favorite = num <= lastIdx
         }
     }
 }

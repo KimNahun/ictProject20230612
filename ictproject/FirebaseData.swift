@@ -2,7 +2,8 @@ import UIKit
 import WebKit
 import Firebase
 
-
+public var lastIdx = 0
+public var numberVisited = Set<String>()
 //파이어베이스에 등록된 글들을 가려오는 기능
 class FireBaseViewController: UIViewController {
     
@@ -14,29 +15,50 @@ class FireBaseViewController: UIViewController {
     
     //내 등록된 키워드를 가져오는 메소드
     func getMyIDData() {
+        lastIdx=0
+        generalNotice = [[String]](repeating: [String](repeating: "", count: 6), count: 260)
+        importantNotice = [[String]](repeating: [String](repeating: "", count: 6), count: 260)
+        totalNotice = [[String]](repeating: [String](repeating: "", count: 6), count: 260)
         //refkeyword는 firebase의 유저정보 -> 식별자 -> (내 모바일 기기의 고유번호) -> 등록된 키워드
+        keywords = [String]() //사용자가 등록한 키워드
         
         let refKeyword = Database.database().reference().child("User").child(fcm!).child("keywords")
         refKeyword.observeSingleEvent(of: .value) { snapshot in
             //읽어들인 내 키워드들
             guard let readFirbaseKeywords = snapshot.value as? [String] else { return }
             //배열에 내가 등록한 키워드들을 추가한다.
+            
             for i in readFirbaseKeywords {
                 keywords.append(i)
             }
         }
+      
         let refSendAll = Database.database().reference().child("User").child(fcm!).child("sendAll")
             refSendAll.observeSingleEvent(of: .value) { snapshot in
                 // sendAll 값을 읽어들인다. 만약 값이 없으면, false로 간주
                 receiveAllMessage = snapshot.value as? Bool ?? false
                 // 이제 'a' 변수는 sendAll의 값이거나, 값이 없을 경우 false이다.
             }
+        
+        numberVisited = Set<String>()
+        let refFavorite = Database.database().reference().child("User").child(fcm!).child("favorite")
+        refFavorite.observeSingleEvent(of: .value) { snapshot in
+
+            for child in snapshot.children {
+                if let childSnapshot = child as? DataSnapshot,
+                   let notice = childSnapshot.value as? [String] {
+                    totalNotice[lastIdx] = notice
+                    numberVisited.insert(notice[1])
+                    lastIdx+=1
+                }
+            }
+            
+       
+        }
     }
     
     func readFireBaseData(fromPath path: String) {
-       generalNotice = [[String]](repeating: [String](repeating: "", count: 6), count: 40)
-       importantNotice = [[String]](repeating: [String](repeating: "", count: 6), count: 40)
-       totalNotice = [[String]](repeating: [String](repeating: "", count: 6), count: 40)
+     
         var idx1 = 0
         var idx1Important = 0
         headDB.child(path).observeSingleEvent(of: .value) { (snapshot) in
@@ -46,7 +68,11 @@ class FireBaseViewController: UIViewController {
                     var idx2Important = 0
                     if let notice = value as? [String: Any] {
                         if let type = notice["image_tag"] as? Int, type == 1 {
-                            // If image_tag is 1, save to important array
+                            if let number = notice["number"] as? String {
+                                if(numberVisited.contains(number)){
+                                    continue
+                                }
+                            }
                             if let title = notice["title"] as? String {
                                 importantNotice[idx1Important][idx2Important] = title
                                 idx2Important+=1
@@ -114,7 +140,7 @@ class FireBaseViewController: UIViewController {
                 return number1 > number2
             }
             
-            var totalIdx = 0
+            var totalIdx = lastIdx+1
             
             for notice in importantNotice {
                 // title이 ""이 아닌 것만 추가

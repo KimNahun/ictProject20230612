@@ -6,9 +6,10 @@ import UserNotifications
 //공지 크롤링
 
 
-public var generalNotice = [[String]](repeating: [String](repeating: "", count: 6), count: 40)
-public var importantNotice = [[String]](repeating: [String](repeating: "", count: 6), count: 40)
-public var totalNotice = [[String]](repeating: [String](repeating: "", count: 6), count: 40)
+public var generalNotice = [[String]](repeating: [String](repeating: "", count: 6), count: 260)
+public var importantNotice = [[String]](repeating: [String](repeating: "", count: 6), count: 260)
+public var totalNotice = [[String]](repeating: [String](repeating: "", count: 6), count: 260)
+public var favoriteStatus = [Bool]()
 public var keywords = [String]() //사용자가 등록한 키워드
 public var noticeTitle = [String]()
 public var searchWord = "" //검색중인단어
@@ -89,8 +90,9 @@ extension AppDelegate: MessagingDelegate {
      //   print("FCM registration token: \(fcmToken ?? "")")
         //fcm 토큰을 추출하고, 그 후에 파이어베이스 데이터를 긁어온다
         fcm = fcmToken
-        getFirebase.readFireBaseData(fromPath: "일반공지")
         getFirebase.getMyIDData()
+        getFirebase.readFireBaseData(fromPath: "일반공지")
+       
     }
     
 }
@@ -105,7 +107,7 @@ struct ictprojectApp: App {
         WindowGroup {
             LoadingView()
             //3초 딜레이가 된 후 ContentView 실행
-            DelayedView(delay: 3.0) {
+            DelayedView(delay: 5.0) {
                 ContentView()
             }
         }
