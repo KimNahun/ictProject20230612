@@ -28,13 +28,13 @@ struct PDFSelectionView: View {
     let pdfNames = ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"]
     var body: some View {
         ScrollView {
-            VStack(spacing: 50) {
+            VStack(spacing: 30) {
                 ForEach(pdfNames, id: \.self) { pdfName in
                     if let pdfURL = Bundle.main.url(forResource: pdfName, withExtension: "pdf") {
                         NavigationLink(destination: PDFViewer(url: pdfURL)) {
                             Text(pdfName)
                                 .frame(width: 100, height: 30)
-                                .background(Color.blue)
+                                .background(Color.cyan)
                                 .foregroundColor(.white)
                                 .cornerRadius(10)
                         }
@@ -47,13 +47,15 @@ struct PDFSelectionView: View {
 
 struct ConvenienceView: View {
     var body: some View {
-        NavigationView {
-
-                VStack(spacing: 50) {
-                    Text("KoreaTech ICT")
-          
-                    Spacer()
-                  
+        VStack {
+            Text("   KoreaTech ICT")
+                .font(.system(size: 25))
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color(UIColor.systemCyan))
+            NavigationView {
+                VStack(spacing:50) {
+                    
                     HStack {
                         Image(systemName: "info.circle").resizable()
                             .frame(width: 70, height: 70) .foregroundColor(Color(UIColor(named:"Color1")!))
@@ -103,12 +105,12 @@ struct ConvenienceView: View {
                         }
                     }
                 }
-                
-                
+            }
+            
             
             
         }
-      
+        
         ButtonItem()
     }
     

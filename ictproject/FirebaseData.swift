@@ -27,7 +27,6 @@ class FireBaseViewController: UIViewController {
             //읽어들인 내 키워드들
             guard let readFirbaseKeywords = snapshot.value as? [String] else { return }
             //배열에 내가 등록한 키워드들을 추가한다.
-            
             for i in readFirbaseKeywords {
                 keywords.append(i)
             }
@@ -37,13 +36,13 @@ class FireBaseViewController: UIViewController {
             refSendAll.observeSingleEvent(of: .value) { snapshot in
                 // sendAll 값을 읽어들인다. 만약 값이 없으면, false로 간주
                 receiveAllMessage = snapshot.value as? Bool ?? false
-                // 이제 'a' 변수는 sendAll의 값이거나, 값이 없을 경우 false이다.
+    
             }
         
         numberVisited = Set<String>()
         let refFavorite = Database.database().reference().child("User").child(fcm!).child("favorite")
         refFavorite.observeSingleEvent(of: .value) { snapshot in
-
+            
             for child in snapshot.children {
                 if let childSnapshot = child as? DataSnapshot,
                    let notice = childSnapshot.value as? [String] {
@@ -58,7 +57,6 @@ class FireBaseViewController: UIViewController {
     }
     
     func readFireBaseData(fromPath path: String) {
-     
         var idx1 = 0
         var idx1Important = 0
         headDB.child(path).observeSingleEvent(of: .value) { (snapshot) in

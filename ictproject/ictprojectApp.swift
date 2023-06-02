@@ -107,6 +107,7 @@ struct ictprojectApp: App {
             LoadingView()
             //5초 딜레이가 된 후 ContentView 실행
             DelayedView(delay: 5.0) {
+          
                 ContentView()
             }
         }

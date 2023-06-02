@@ -14,128 +14,136 @@ struct ContentView: View {
     @State private var showingContentView = false
     @State private var noticeType = noticeTypeSelect
     var body: some View {
-        ZStack {
-            NavigationView{
-                VStack{
-                    Text("KoreaTech ICT")
-                        .font(Font(medium25))
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity).frame(height: 30)
-                        .background(Color(UIColor(named:"Color4")!))
-                    HStack {
-                        Button(action : {
-                            showingOverlay = true
-                        }) {
-                            Image(systemName:"line.3.horizontal")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(height: 20).foregroundColor(.black)
-                        }.padding(20)
-                        Text(noticeType).bold().font(.system(size: 20))
-                        
-                        Spacer()
-                        
-                        Text("검색: ")
-                        TextField("",text: $word,onCommit: {
-                            searchWord = word
-                        }).frame(width: 70)
-                        
-                        Button(action: {
-                            searchWord = word
-                            searchingWord = true
-                            showingContentView = true
-                            print(searchWord)
-                        }) {
-                            Image(systemName:"magnifyingglass")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 20, height: 20).foregroundColor(.black)
-                        }
-                        .fullScreenCover(isPresented: $showingContentView, content: {
-                            ContentView()
-                        })
-                        
-                    }
+        VStack{
+            Text("   KoreaTech ICT")
+                .font(.system(size: 25))
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color(UIColor.systemCyan))
+
+            ZStack {
+                
+                NavigationView{
                     
-                    ScrollView{
-                        ForEach(0..<totalNotice.count) { index in
-                            HStack{
-                                NoticeItem(num: index)
+                    VStack{
+                        
+                        
+                        HStack {
+                            Button(action : {
+                                showingOverlay = true
+                            }) {
+                                Image(systemName:"line.3.horizontal")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(height: 20).foregroundColor(.black)
+                            }.padding(20)
+                            Text(noticeType).bold().font(.system(size: 20))
+                            
+                            Spacer()
+                            
+                            Text("검색: ")
+                            TextField("",text: $word,onCommit: {
+                                searchWord = word
+                            }).frame(width: 70)
+                            
+                            Button(action: {
+                                searchWord = word
+                                searchingWord = true
+                                showingContentView = true
+                                print(searchWord)
+                            }) {
+                                Image(systemName:"magnifyingglass")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 20, height: 20).foregroundColor(.black)
                             }
-                        }
-                    }
-                    ButtonItem()
-                }
-            }
-            
-            if showingOverlay {
-                Color.black.opacity(0.4)
-                    .edgesIgnoringSafeArea(.all)
-                    .onTapGesture {
-                        showingOverlay = false
-                    }
-                VStack(alignment: .leading) {
-                    
-                    Text("공지 종류를 선택하세요").font(.system(size: 25)).bold().padding(10)
-                    Button("일반공지") {
-                        getFirebase.getMyIDData()
-                        getFirebase.readFireBaseData(fromPath: "일반공지")
-                        noticeTypeSelect="일반공지"
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                            showingContentView=true
-                            searchingWord = false
+                            .fullScreenCover(isPresented: $showingContentView, content: {
+                                ContentView()
+                            })
                             
                         }
                         
-                        
-                    }.fullScreenCover(isPresented: $showingContentView, content: {
-                        ContentView()
-                        
-                    }).foregroundColor(.black).padding(10)
-                    Button("장학공지") {
-                        getFirebase.getMyIDData()
-                        getFirebase.readFireBaseData(fromPath: "장학공지")
-                        noticeTypeSelect="장학공지"
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                            showingContentView=true
-                            searchingWord = false
+                        ScrollView{
+                            ForEach(0..<totalNotice.count) { index in
+                                HStack{
+                                    NoticeItem(num: index)
+                                }
+                            }
                         }
-                        
+                        ButtonItem()
                     }
-                    .fullScreenCover(isPresented: $showingContentView, content: {
-                        ContentView()
-                    }).foregroundColor(.black).padding(10)
                     
-                    Button("학사공지") {
-                        getFirebase.getMyIDData()
-                        getFirebase.readFireBaseData(fromPath: "학사공지")
-                        noticeTypeSelect="학사공지"
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                            showingContentView=true
-                            searchingWord = false
-                        }
-                    }
-                    .fullScreenCover(isPresented: $showingContentView, content: {
-                        ContentView()
-                    }).foregroundColor(.black).padding(10)
-                    
-                    Button("채용공지") {
-                        getFirebase.getMyIDData()
-                        getFirebase.readFireBaseData(fromPath: "채용공지")
-                        noticeTypeSelect="채용공지"
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                            showingContentView=true
-                            searchingWord = false
-                        }
-                    }
-                    .fullScreenCover(isPresented: $showingContentView, content: {
-                        ContentView()
-                    }).foregroundColor(.black).padding(10)
                 }
-                .frame(width: 350, height: 250)  // Adjust as needed
-                .background(Color.white)
                 
+                if showingOverlay {
+                    Color.black.opacity(0.4)
+                        .edgesIgnoringSafeArea(.all)
+                        .onTapGesture {
+                            showingOverlay = false
+                        }
+                    VStack(alignment: .leading) {
+                        
+                        Text("공지 종류를 선택하세요").font(.system(size: 25)).bold().padding(10)
+                        Button("일반공지") {
+                            getFirebase.getMyIDData()
+                            getFirebase.readFireBaseData(fromPath: "일반공지")
+                            noticeTypeSelect="일반공지"
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                showingContentView=true
+                                searchingWord = false
+                                
+                            }
+                            
+                            
+                        }.fullScreenCover(isPresented: $showingContentView, content: {
+                            ContentView()
+                            
+                        }).foregroundColor(.black).padding(10)
+                        Button("장학공지") {
+                            getFirebase.getMyIDData()
+                            getFirebase.readFireBaseData(fromPath: "장학공지")
+                            noticeTypeSelect="장학공지"
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                showingContentView=true
+                                searchingWord = false
+                            }
+                            
+                        }
+                        .fullScreenCover(isPresented: $showingContentView, content: {
+                            ContentView()
+                        }).foregroundColor(.black).padding(10)
+                        
+                        Button("학사공지") {
+                            getFirebase.getMyIDData()
+                            getFirebase.readFireBaseData(fromPath: "학사공지")
+                            noticeTypeSelect="학사공지"
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                showingContentView=true
+                                searchingWord = false
+                            }
+                        }
+                        .fullScreenCover(isPresented: $showingContentView, content: {
+                            ContentView()
+                        }).foregroundColor(.black).padding(10)
+                        
+                        Button("채용공지") {
+                            getFirebase.getMyIDData()
+                            getFirebase.readFireBaseData(fromPath: "채용공지")
+                            noticeTypeSelect="채용공지"
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                showingContentView=true
+                                searchingWord = false
+                            }
+                        }
+                        .fullScreenCover(isPresented: $showingContentView, content: {
+                            ContentView()
+                        }).foregroundColor(.black).padding(10)
+                    }
+                    .frame(width: 350, height: 250)  // Adjust as needed
+                    .background(Color.white)
+                    
+                }
             }
         }
     }
@@ -152,13 +160,12 @@ struct ButtonItem: View {
             //버튼 누르면 키워드 등록하는 view로 감
             VStack{
                 Button(action: {
-                    
                     showingSearchView = true
                 }) {
                     Image(systemName:"plus")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 30, height: 30).foregroundColor(.black)
+                        .frame(width: 30, height: 30).foregroundColor(.cyan)
                 }
                 .fullScreenCover(isPresented: $showingSearchView, content: {
                     
@@ -182,8 +189,9 @@ struct ButtonItem: View {
                     Image(systemName:"house.fill")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 30, height: 30).foregroundColor(.black)
+                        .frame(width: 30, height: 30).foregroundColor(.cyan)
                 }
+      
                 .fullScreenCover(isPresented: $showingContentView, content: {
                     ContentView()
                 })
@@ -198,8 +206,9 @@ struct ButtonItem: View {
                     Image(systemName:"folder.fill")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 30, height: 30).foregroundColor(.black)
+                        .frame(width: 30, height: 30).foregroundColor(.cyan)
                 }
+       
                 .fullScreenCover(isPresented: $showingConvenienceView, content: {
                     ConvenienceView()
                 })

@@ -16,6 +16,14 @@ struct SearchView: View {
     var body: some View {
         
         VStack {
+            Text("   KoreaTech ICT")
+                .font(.system(size: 25))
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color(UIColor.systemCyan))
+            
+            Spacer(minLength: 30)
+            
             Text("등록된 키워드").font(.system(size: 30))
             TextField("입력", text: $word)
                 .frame(width: 200, height: 40)
@@ -23,7 +31,7 @@ struct SearchView: View {
                 .background(Color.gray.opacity(0.2))
                 .cornerRadius(10)
             //새로운 키워드를 추가하는 버튼
-            HStack {
+    
                 Button(action: {
                     //배열의 길이가 10개 미만일 때만 새로운 단어를 추가합니다.
                     if temp.count < 10 {
@@ -39,12 +47,13 @@ struct SearchView: View {
                 }) {
                     Text("추가하기")
                         .frame(width: 150, height: 40)
-                        .background(Color.blue)
+                        .background(Color.cyan)
                         .foregroundColor(.white)
                         .cornerRadius(10)
-                }.padding(.leading, 60)
+                }
                 .padding(.bottom, 20)
-                VStack {
+                HStack {
+                    Text("모든 알림 받기 :  ").font(Font(medium15))
                     Button(action: {
                         checkBox.toggle()
                         let userRef = Database.database().reference().child("User").child(fcm!)
@@ -62,9 +71,9 @@ struct SearchView: View {
                             .scaledToFit()
                             .frame(width: 30, height: 30).foregroundColor(.black)
                     }.frame(width:30,height:30)
-                    Text("모든 알림").font(Font(bold10))
+                   
                 }
-            }
+            
                 
                 
                 

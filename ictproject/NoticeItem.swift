@@ -49,7 +49,7 @@ struct NoticeItem: View {
                                     if(totalNotice[num][5]=="1"){
                                         Text("NOTICE").font(Font(medium15))
                                             .foregroundColor(.white)
-                                            .background(Color.red)
+                                            .background(Color("Color1"))
                                     }
                                     Spacer()
                                     Button(action: {
@@ -67,7 +67,7 @@ struct NoticeItem: View {
                                             Database.database().reference().child("User").child(fcm!).child("favorite").child(favoriteNumber).removeValue()
                                         }
                                     }) {
-                                        Image(systemName: favorite ? "star.fill" : "star")
+                                        Image(systemName: favorite ? "star.fill" : "star").foregroundColor(favorite ? .yellow : .gray)
                                         
                                     }
                                 }.padding(5)
@@ -123,7 +123,7 @@ struct NoticeItem: View {
                                         Database.database().reference().child("User").child(fcm!).child("favorite").child(favoriteNumber).removeValue()
                                     }
                                 }) {
-                                    Image(systemName: favorite ? "star.fill" : "star")
+                                    Image(systemName: favorite ? "star.fill" : "star").foregroundColor(favorite ? .yellow : .gray)
                                 }
                             }.padding(5)
                             HStack {
