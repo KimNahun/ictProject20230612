@@ -25,14 +25,17 @@ struct SearchView: View {
             //새로운 키워드를 추가하는 버튼
             HStack {
                 Button(action: {
-                    //배열에 새로운 단어를 추가한다.
-                    temp.append(word)
-                    keywords=temp
-                    //데이터베이스에 배열을 갱신한다.
-                    Database.database().reference().child("User").child(fcm!).child("keywords").setValue(temp)
-                    
-                    //현재 입력하던 단어는 공백으로 바꿈
-                    word = ""
+                    //배열의 길이가 10개 미만일 때만 새로운 단어를 추가합니다.
+                    if temp.count < 10 {
+                        //배열에 새로운 단어를 추가한다.
+                        temp.append(word)
+                        keywords=temp
+                        //데이터베이스에 배열을 갱신한다.
+                        Database.database().reference().child("User").child(fcm!).child("keywords").setValue(temp)
+
+                        //현재 입력하던 단어는 공백으로 바꿈
+                        word = ""
+                    }
                 }) {
                     Text("추가하기")
                         .frame(width: 150, height: 40)

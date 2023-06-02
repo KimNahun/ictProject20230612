@@ -17,7 +17,11 @@ struct ContentView: View {
         ZStack {
             NavigationView{
                 VStack{
-                    //       Text("잡아")
+                    Text("KoreaTech ICT")
+                        .font(Font(medium25))
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity).frame(height: 30)
+                        .background(Color(UIColor(named:"Color4")!))
                     HStack {
                         Button(action : {
                             showingOverlay = true
@@ -144,7 +148,7 @@ struct ButtonItem: View {
     @State private var showingSearchView = false
     @State private var showingConvenienceView = false
     var body: some View {
-        HStack {
+        HStack(spacing:100) {
             //버튼 누르면 키워드 등록하는 view로 감
             VStack{
                 Button(action: {
@@ -160,9 +164,9 @@ struct ButtonItem: View {
                     
                     SearchView()
                 })
-                Text("키워드 등록")
+                Text("키워드").font(Font(medium15))
             }
-            Spacer()
+            //   Spacer()
             VStack{
                 //새로고침 버튼
                 Button(action: {
@@ -183,9 +187,9 @@ struct ButtonItem: View {
                 .fullScreenCover(isPresented: $showingContentView, content: {
                     ContentView()
                 })
-                Text("홈")
+                Text("홈").font(Font(medium15))
             }
-            Spacer()
+      //      Spacer()
             VStack {
                 //편의 기능 수행 버튼
                 Button(action: {
@@ -199,7 +203,7 @@ struct ButtonItem: View {
                 .fullScreenCover(isPresented: $showingConvenienceView, content: {
                     ConvenienceView()
                 })
-                Text("정보")
+                Text("정보").font(Font(medium15))
             }
         }
     }

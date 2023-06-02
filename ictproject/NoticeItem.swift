@@ -9,6 +9,7 @@ import SwiftUI
 import SafariServices
 import Firebase
 public let medium15 = UIFont(name: "Pretendard-Medium",size:15)!
+public let medium25 = UIFont(name: "Pretendard-Medium",size:25)!
 public let regular15 = UIFont(name: "Pretendard-Regular",size:15)!
 public let semiBold15 = UIFont(name: "Pretendard-SemiBold",size:15)!
 public let light15 = UIFont(name: "Pretendard-Light",size:15)!

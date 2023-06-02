@@ -44,6 +44,7 @@
 		D28F5E072A1E5A5A00DD8B0F /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = D28F5DEE2A1E5A5A00DD8B0F /* Pretendard-Thin.otf */; };
 		D28F5E082A1E5A5A00DD8B0F /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = D28F5DEE2A1E5A5A00DD8B0F /* Pretendard-Thin.otf */; };
 		D28F5E092A1E5A5A00DD8B0F /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = D28F5DEE2A1E5A5A00DD8B0F /* Pretendard-Thin.otf */; };
+		D29266252A28D75D00CAC6FC /* information.pdf in Resources */ = {isa = PBXBuildFile; fileRef = D29266242A28D75D00CAC6FC /* information.pdf */; };
 		D2C220522A032E0F00F190AE /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D2C220512A032E0F00F190AE /* FirebaseAnalytics */; };
 		D2C220542A032E0F00F190AE /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = D2C220532A032E0F00F190AE /* FirebaseAnalyticsOnDeviceConversion */; };
 		D2C220562A032E0F00F190AE /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D2C220552A032E0F00F190AE /* FirebaseAnalyticsSwift */; };
@@ -127,6 +128,7 @@
 		D28F5DEC2A1E5A5A00DD8B0F /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
 		D28F5DED2A1E5A5A00DD8B0F /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		D28F5DEE2A1E5A5A00DD8B0F /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
+		D29266242A28D75D00CAC6FC /* information.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = information.pdf; sourceTree = "<group>"; };
 		D2C220872A03443400F190AE /* FirebaseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseData.swift; sourceTree = "<group>"; };
 		D2D6BADB2A0313EF002558FE /* ictproject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ictproject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2D6BADE2A0313EF002558FE /* ictprojectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ictprojectApp.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 		D20306A62A10752300C41484 /* year */ = {
 			isa = PBXGroup;
 			children = (
+				D29266242A28D75D00CAC6FC /* information.pdf */,
 				D28F5DE32A1D6F3600DD8B0F /* ictTeam.pdf */,
 				D28F5DE12A1BD5EE00DD8B0F /* professor.pdf */,
 				D20306A82A1133C700C41484 /* 2016.pdf */,
@@ -445,6 +448,7 @@
 				D20306AF2A1133C700C41484 /* 2016.pdf in Resources */,
 				D2D6BAE62A0313F1002558FE /* Preview Assets.xcassets in Resources */,
 				D28F5E012A1E5A5A00DD8B0F /* Pretendard-Medium.otf in Resources */,
+				D29266252A28D75D00CAC6FC /* information.pdf in Resources */,
 				D2D6BAE32A0313F1002558FE /* Assets.xcassets in Resources */,
 				D20306B22A1133C700C41484 /* 2021.pdf in Resources */,
 				D28F5DF82A1E5A5A00DD8B0F /* Pretendard-ExtraBold.otf in Resources */,

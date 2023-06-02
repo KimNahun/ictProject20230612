@@ -30,7 +30,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         //파이어베이스 초기화
         FirebaseApp.configure()
         
-        //여기서부터는 왜있는지 잘모르겠음.
+        
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
             UNUserNotificationCenter.current().delegate = self
@@ -54,8 +54,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         
     }
-    //이거도 왜있는지 잘 모름
-    //fcm 토큰을 얻는 걸로 추정
+   
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
         let token = tokenParts.joined()
@@ -106,7 +105,7 @@ struct ictprojectApp: App {
     var body: some Scene {
         WindowGroup {
             LoadingView()
-            //3초 딜레이가 된 후 ContentView 실행
+            //5초 딜레이가 된 후 ContentView 실행
             DelayedView(delay: 5.0) {
                 ContentView()
             }
