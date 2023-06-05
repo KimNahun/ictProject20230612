@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D20306A52A0EA65000C41484 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D20306A42A0EA65000C41484 /* GoogleService-Info.plist */; };
 		D20306AE2A1133C700C41484 /* 2023.pdf in Resources */ = {isa = PBXBuildFile; fileRef = D20306A72A1133C700C41484 /* 2023.pdf */; };
 		D20306AF2A1133C700C41484 /* 2016.pdf in Resources */ = {isa = PBXBuildFile; fileRef = D20306A82A1133C700C41484 /* 2016.pdf */; };
 		D20306B02A1133C700C41484 /* 2018.pdf in Resources */ = {isa = PBXBuildFile; fileRef = D20306A92A1133C700C41484 /* 2018.pdf */; };
@@ -45,6 +44,7 @@
 		D28F5E082A1E5A5A00DD8B0F /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = D28F5DEE2A1E5A5A00DD8B0F /* Pretendard-Thin.otf */; };
 		D28F5E092A1E5A5A00DD8B0F /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = D28F5DEE2A1E5A5A00DD8B0F /* Pretendard-Thin.otf */; };
 		D29266252A28D75D00CAC6FC /* information.pdf in Resources */ = {isa = PBXBuildFile; fileRef = D29266242A28D75D00CAC6FC /* information.pdf */; };
+		D292662B2A2D6AF300CAC6FC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D292662A2A2D6AF300CAC6FC /* GoogleService-Info.plist */; };
 		D2C220522A032E0F00F190AE /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D2C220512A032E0F00F190AE /* FirebaseAnalytics */; };
 		D2C220542A032E0F00F190AE /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = D2C220532A032E0F00F190AE /* FirebaseAnalyticsOnDeviceConversion */; };
 		D2C220562A032E0F00F190AE /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D2C220552A032E0F00F190AE /* FirebaseAnalyticsSwift */; };
@@ -107,9 +107,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D20306A22A0E9B7800C41484 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D20306A32A0E9BDF00C41484 /* ictproject.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ictproject.entitlements; sourceTree = "<group>"; };
-		D20306A42A0EA65000C41484 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D20306A72A1133C700C41484 /* 2023.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = 2023.pdf; sourceTree = "<group>"; };
 		D20306A82A1133C700C41484 /* 2016.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = 2016.pdf; sourceTree = "<group>"; };
 		D20306A92A1133C700C41484 /* 2018.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = 2018.pdf; sourceTree = "<group>"; };
@@ -129,6 +127,8 @@
 		D28F5DED2A1E5A5A00DD8B0F /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		D28F5DEE2A1E5A5A00DD8B0F /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
 		D29266242A28D75D00CAC6FC /* information.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = information.pdf; sourceTree = "<group>"; };
+		D292662A2A2D6AF300CAC6FC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D292662C2A2D6AFF00CAC6FC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2C220872A03443400F190AE /* FirebaseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseData.swift; sourceTree = "<group>"; };
 		D2D6BADB2A0313EF002558FE /* ictproject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ictproject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2D6BADE2A0313EF002558FE /* ictprojectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ictprojectApp.swift; sourceTree = "<group>"; };
@@ -256,10 +256,10 @@
 		D2D6BADD2A0313EF002558FE /* ictproject */ = {
 			isa = PBXGroup;
 			children = (
+				D292662C2A2D6AFF00CAC6FC /* Info.plist */,
+				D292662A2A2D6AF300CAC6FC /* GoogleService-Info.plist */,
 				D28F5DE52A1E5A1400DD8B0F /* Font */,
 				D20306A62A10752300C41484 /* year */,
-				D20306A42A0EA65000C41484 /* GoogleService-Info.plist */,
-				D20306A22A0E9B7800C41484 /* Info.plist */,
 				D20306A32A0E9BDF00C41484 /* ictproject.entitlements */,
 				D2E7FC262A08BCFD0099DE98 /* LoadingView.swift */,
 				D2C220872A03443400F190AE /* FirebaseData.swift */,
@@ -443,7 +443,6 @@
 				D2E7FC2F2A0CB16D0099DE98 /* 2019.pdf in Resources */,
 				D28F5DFE2A1E5A5A00DD8B0F /* Pretendard-Black.otf in Resources */,
 				D28F5DE42A1D6F3600DD8B0F /* ictTeam.pdf in Resources */,
-				D20306A52A0EA65000C41484 /* GoogleService-Info.plist in Resources */,
 				D28F5E072A1E5A5A00DD8B0F /* Pretendard-Thin.otf in Resources */,
 				D20306AF2A1133C700C41484 /* 2016.pdf in Resources */,
 				D2D6BAE62A0313F1002558FE /* Preview Assets.xcassets in Resources */,
@@ -455,6 +454,7 @@
 				D28F5DFB2A1E5A5A00DD8B0F /* Pretendard-Regular.otf in Resources */,
 				D28F5E042A1E5A5A00DD8B0F /* Pretendard-Bold.otf in Resources */,
 				D28F5DEF2A1E5A5A00DD8B0F /* Pretendard-Light.otf in Resources */,
+				D292662B2A2D6AF300CAC6FC /* GoogleService-Info.plist in Resources */,
 				D28F5DF22A1E5A5A00DD8B0F /* Pretendard-ExtraLight.otf in Resources */,
 				D20306B12A1133C700C41484 /* 2022.pdf in Resources */,
 				D20306B02A1133C700C41484 /* 2018.pdf in Resources */,
@@ -672,11 +672,13 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ictproject/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "잡아";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -703,11 +705,13 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ictproject/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "잡아";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

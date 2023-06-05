@@ -49,7 +49,7 @@ struct NoticeItem: View {
                                     if(totalNotice[num][5]=="1"){
                                         Text("NOTICE").font(Font(medium15))
                                             .foregroundColor(.white)
-                                            .background(Color("Color1"))
+                                            .background(Color.red)
                                     }
                                     Spacer()
                                     Button(action: {
