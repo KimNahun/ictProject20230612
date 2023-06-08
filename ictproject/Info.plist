@@ -2,17 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIAppFonts</key>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
-		<string>Pretendard-Black.otf</string>
-		<string>Pretendard-Bold.otf</string>
-		<string>Pretendard-ExtraBold.otf</string>
-		<string>Pretendard-ExtraLight.otf</string>
-		<string>Pretendard-Light.otf</string>
-		<string>Pretendard-Medium.otf</string>
-		<string>Pretendard-Regular.otf</string>
-		<string>Pretendard-SemiBold.otf</string>
-		<string>Pretendard-Thin.otf</string>
+		<string>com.nahun.ictpjt.networkUpdate</string>
 	</array>
 	<key>CFBundleURLTypes</key>
 	<array>
@@ -25,11 +17,29 @@
 			</array>
 		</dict>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Pretendard-Black.otf</string>
+		<string>Pretendard-Bold.otf</string>
+		<string>Pretendard-ExtraBold.otf</string>
+		<string>Pretendard-ExtraLight.otf</string>
+		<string>Pretendard-Light.otf</string>
+		<string>Pretendard-Medium.otf</string>
+		<string>Pretendard-Regular.otf</string>
+		<string>Pretendard-SemiBold.otf</string>
+		<string>Pretendard-Thin.otf</string>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
 		<string>processing</string>
 		<string>remote-notification</string>
 	</array>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0.1</string>
+	<key>CFBundleVersion</key>
+	<string>2</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>13.3</string>
 </dict>
 </plist>

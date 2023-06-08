@@ -36,14 +36,15 @@ struct NoticeItem: View {
 
     @State private var favorite = false
     var body: some View {
-        VStack {
+        VStack(spacing:0) {
           
             if searchingWord {
                 if totalNotice[num][0].contains(searchWord) {
                     if let validURL = URL(string: totalNotice[num][3]) {
                         NavigationLink(destination: SafariView(url: validURL)) {
-                            VStack {///
+                            VStack(spacing:0) {///
                                 HStack {
+                               
                                     Text(totalNotice[num][1]).font(Font(medium15))
                                         .foregroundColor(.black)
                                     if(totalNotice[num][5]=="1"){
@@ -54,13 +55,29 @@ struct NoticeItem: View {
                                     Spacer()
                                     Button(action: {
                                         favorite.toggle()
-                                        if favorite {
-                                            let favoriteData = totalNotice[num][0...5].reduce(into: [String: String]()) { dict, item in
-                                                dict[String(dict.count)] = item
+                                        // Reference to the user's favorites in Firebase
+                                        let ref = Database.database().reference().child("User").child(fcm!).child("favorite")
+
+                                        ref.observeSingleEvent(of: .value, with: { snapshot in
+                                            let favoritesCount = snapshot.childrenCount
+                                            // If the user has less than 40 favorites, allow them to add more
+                                            if favoritesCount < 40 {
+                                              
+                                                if favorite {
+                                                    let favoriteData = totalNotice[num][0...5].reduce(into: [String: String]()) { dict, item in
+                                                        dict[String(dict.count)] = item
+                                                    }
+                                                    let childUpdates = ["User/\(fcm!)/favorite/\(totalNotice[num][1])": favoriteData]
+                                                    Database.database().reference().updateChildValues(childUpdates)
+                                                }
+                                            } else {
+                                                // If the user already has 40 or more favorites, don't allow them to add more
+                                                favorite.toggle()
+                                                print("Cannot add more than 40 favorites.")
                                             }
-                                            let childUpdates = ["User/\(fcm!)/favorite/\(totalNotice[num][1])": favoriteData]
-                                            Database.database().reference().updateChildValues(childUpdates)
-                                        } else {
+                                        })
+
+                                        if !favorite {
                                             // favorite가 false일 때의 동작
                                             let favoriteNumber = totalNotice[num][1]
                                             // 데이터베이스에서 해당 번호의 favorite 제거
@@ -68,10 +85,10 @@ struct NoticeItem: View {
                                         }
                                     }) {
                                         Image(systemName: favorite ? "star.fill" : "star").foregroundColor(favorite ? .yellow : .gray)
-                                        
                                     }
                                 }.padding(5)
-                                HStack {
+                                HStack{
+                                 
                                     Text(totalNotice[num][0]).font(Font.custom("Pretendard-Bold",size:17))
                                         .foregroundColor(.black)
                                         .multilineTextAlignment(.leading) // 왼쪽 정렬로 설정
@@ -79,7 +96,7 @@ struct NoticeItem: View {
                                     
                                     Spacer()
                                     
-                                }
+                                }.padding(5)
                                 
                                 
                                 HStack {
@@ -98,8 +115,9 @@ struct NoticeItem: View {
             } else {
                 if let validURL = URL(string: totalNotice[num][3]) {
                     NavigationLink(destination: SafariView(url: validURL)) {
-                        VStack {///
+                        VStack(spacing:0){///
                             HStack {
+                            
                                 Text(totalNotice[num][1]).font(Font(medium15))
                                     .foregroundColor(.black)
                                 if(totalNotice[num][5]=="1"){
@@ -110,13 +128,29 @@ struct NoticeItem: View {
                                 Spacer()
                                 Button(action: {
                                     favorite.toggle()
-                                    if favorite {
-                                        let favoriteData = totalNotice[num][0...5].reduce(into: [String: String]()) { dict, item in
-                                            dict[String(dict.count)] = item
+                                    // Reference to the user's favorites in Firebase
+                                    let ref = Database.database().reference().child("User").child(fcm!).child("favorite")
+
+                                    ref.observeSingleEvent(of: .value, with: { snapshot in
+                                        let favoritesCount = snapshot.childrenCount
+                                        // If the user has less than 40 favorites, allow them to add more
+                                        if favoritesCount < 40 {
+                                          
+                                            if favorite {
+                                                let favoriteData = totalNotice[num][0...5].reduce(into: [String: String]()) { dict, item in
+                                                    dict[String(dict.count)] = item
+                                                }
+                                                let childUpdates = ["User/\(fcm!)/favorite/\(totalNotice[num][1])": favoriteData]
+                                                Database.database().reference().updateChildValues(childUpdates)
+                                            }
+                                        } else {
+                                            favorite.toggle()
+                                            // If the user already has 40 or more favorites, don't allow them to add more
+                                            print("Cannot add more than 40 favorites.")
                                         }
-                                        let childUpdates = ["User/\(fcm!)/favorite/\(totalNotice[num][1])": favoriteData]
-                                        Database.database().reference().updateChildValues(childUpdates)
-                                    } else {
+                                    })
+
+                                    if !favorite {
                                         // favorite가 false일 때의 동작
                                         let favoriteNumber = totalNotice[num][1]
                                         // 데이터베이스에서 해당 번호의 favorite 제거
@@ -125,8 +159,9 @@ struct NoticeItem: View {
                                 }) {
                                     Image(systemName: favorite ? "star.fill" : "star").foregroundColor(favorite ? .yellow : .gray)
                                 }
-                            }.padding(5)
+                                }.padding(5)
                             HStack {
+                     
                                 Text(totalNotice[num][0]).font(Font.custom("Pretendard-Bold",size:17))
                                     .foregroundColor(.black)
                                     .multilineTextAlignment(.leading) // 왼쪽 정렬로 설정
@@ -134,7 +169,7 @@ struct NoticeItem: View {
                                 
                                 Spacer()
                                 
-                            }
+                            }.padding(5)
                             
                             
                             HStack {

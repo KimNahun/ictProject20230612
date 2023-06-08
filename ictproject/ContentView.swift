@@ -168,7 +168,6 @@ struct ButtonItem: View {
                         .frame(width: 30, height: 30).foregroundColor(.cyan)
                 }
                 .fullScreenCover(isPresented: $showingSearchView, content: {
-                    
                     SearchView()
                 })
                 Text("키워드").font(Font(medium15))
