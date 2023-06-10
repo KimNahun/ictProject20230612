@@ -94,6 +94,11 @@ class FireBaseViewController: UIViewController {
                             importantNotice[idx1Important][idx2Important]="1"
                             idx1Important+=1
                         } else {
+                            if let number = notice["number"] as? String {
+                                if(numberVisited.contains(number)){
+                                    continue
+                                }
+                            }
                             // If image_tag is not 1 or is not present, save to regular array
                             if let title = notice["title"] as? String {
                                 generalNotice[idx1][idx2] = title
