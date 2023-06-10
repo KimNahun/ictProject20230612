@@ -20,20 +20,29 @@ Object.keys(noticeTypes).forEach(noticeTypeKey => {
             const visitedRef = admin.database().ref(`/visited/${noticeType}`);
             const visitedSnapshot = await visitedRef.once('value');
 
-            if (visitedSnapshot.hasChild(notice.number)) {
-                console.log('Notice has already been processed:', notice.number);
-                // Update with image_tag
-                visitedRef.child(notice.number).set(notice.image_tag === 1);
-		        return null;
-            } else {
-                visitedRef.update({[notice.number]: notice.image_tag === 1});
-                // Prune the database if it has more than 50 records.
-                if (visitedSnapshot.numChildren() > 100) {
-                    const childKeys = Object.entries(visitedSnapshot.val()).filter(([key, value]) => !value);
-                    childKeys.sort((a, b) => a[0] - b[0]); // Sort keys in ascending order.
-                    if (childKeys.length > 0) {
-                        visitedRef.child(childKeys[0][0]).remove(); // Remove the smallest key.
-                    }
+            // Save or update the date of the notice
+            const currentDate = new Date().toISOString();
+            // Convert notice.number to a string if it's a number
+const noticeNumber = typeof notice.number === 'number' ? notice.number.toString() : notice.number;
+
+if (visitedSnapshot.hasChild(noticeNumber)) {
+    console.log('Notice has already been processed:', noticeNumber);
+    // Update with the current date using a transaction
+    visitedRef.child(noticeNumber).transaction(() => {
+        return currentDate;
+    });
+    // If notice has already been processed, exit the function
+    return;
+} else {
+    await visitedRef.update({[noticeNumber]: currentDate});
+}
+
+            // Prune the database if it has more than - - - records.
+            if (visitedSnapshot.numChildren() > 100) {
+                const childKeys = Object.keys(visitedSnapshot.val());
+                childKeys.sort((a, b) => new Date(a) - new Date(b)); // Sort keys in ascending order.
+                if (childKeys.length > 0) {
+                    visitedRef.child(childKeys[0]).remove(); // Remove the smallest key.
                 }
             }
 
