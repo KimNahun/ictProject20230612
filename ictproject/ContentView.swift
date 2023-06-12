@@ -190,7 +190,7 @@ struct ButtonItem: View {
                 Button(action: {
                     isHomeButtonDisabled = true  // 버튼을 비활성화
                     getFirebase.getMyIDData()
-                    getFirebase.readFireBaseData(fromPath: "일반공지")
+                    getFirebase.readFireBaseData(fromPath: noticeTypeSelect)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                         showingContentView = true
                         searchingWord=false

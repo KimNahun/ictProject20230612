@@ -34,7 +34,7 @@ struct SearchView: View {
     
                 Button(action: {
                     //배열의 길이가 10개 미만일 때만 새로운 단어를 추가합니다.
-                    if temp.count < 10 {
+                    if temp.count < 10 && !word.isEmpty {
                         //배열에 새로운 단어를 추가한다.
                         temp.append(word)
                         keywords=temp
